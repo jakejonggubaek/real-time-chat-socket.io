@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
 
         io.to(user.room).emit('roomData', {room: user.room, users:getUsersInRoom(user.room)});
 
-        
+
         callback();
     });
 
@@ -50,10 +50,8 @@ io.on('connection', (socket) => {
     });
     
 });
-
+app.use(cors());
 app.use(router);
-
-app.use(cors({ origin: true }));
 
 server.listen(PORT, () => {
     console.log(`server is running on ${PORT}`);
