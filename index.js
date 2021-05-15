@@ -9,18 +9,13 @@ const router = require('./router');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server, (httpServer, {
-    cors: {
-        origin: "https://team-to-do-manager.netlify.app",
-        methods: ["GET", "POST"]
-    }
-}));
+const io = socketio(server, {
+    'cors': {
+        'methods': ['GET', 'PATCH', 'POST', 'PUT'], 'origin': true } 
+    });
 
 app.use(cors());
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
+app.use(router);
 
 io.on('connect', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
