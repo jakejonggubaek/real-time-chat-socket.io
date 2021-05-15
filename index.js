@@ -10,11 +10,9 @@ const router = require('./router');
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
-    cors: {
-        origin: "https://team-to-do-manager.netlify.app",
-        methods: ["GET", "POST"],
-    }
-});
+    'cors': {
+        'methods': ['GET', 'PATCH', 'POST', 'PUT'], 'origin': true } 
+    });
 
 app.use(cors());
 app.use(router);
